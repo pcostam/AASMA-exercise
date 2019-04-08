@@ -339,18 +339,30 @@ public class StrategyPlayers {
 			double non_free_mine = strategies[0][i_A].utility2 - strategies[1][i_A].utility2 - strategies[0][i_B].utility2 + strategies[1][i_B].utility2;
 			double c_mine = -strategies[1][i_A].utility2+strategies[1][i_B].utility2; 
 			double x_mine = c_mine/non_free_mine;
+			double x_mine_c = 1-x_mine;
 			//printMatrix(A);
 			//double x = LinearEquation.solveSystem(A,b);
 			double non_free_peer = strategies[i_A][0].utility1 - strategies[i_A][1].utility1 - strategies[i_B][0].utility1 + strategies[i_B][1].utility1;
 			double c_peer = -strategies[i_A][1].utility1+strategies[i_B][1].utility1; 
 			double x_peer = c_peer/non_free_peer;
-			if(non_free_peer != 0 && non_free_mine != 0)
+			double x_peer_c = 1-x_peer;
+			if(x_peer == 1)
+			{
+				x_peer = 0.5;
+				x_peer_c = 0.5;
+			}
+			if(x_mine == 1)
+			{
+				x_mine = 0.5;
+				x_mine_c = 0.5;
+			}
+			if(non_free_peer != 0 && non_free_mine != 0 && x_peer > 0 && x_mine > 0 && x_peer < 1 && x_mine < 1)
 			{
 				
 			
 				return("mine=("+ String.format(Locale.US, "%.2f", x_mine ) + "," + 
-						String.format(Locale.US, "%.2f", 1-x_mine ) + "),"+ "peer=(" + String.format(Locale.US, "%.2f", x_peer ) +
-						"," + String.format(Locale.US, "%.2f",  1- x_peer ) + ")");
+						String.format(Locale.US, "%.2f", x_mine_c ) + "),"+ "peer=(" + String.format(Locale.US, "%.2f", x_peer ) +
+						"," + String.format(Locale.US, "%.2f",  x_peer_c ) + ")");
 			}
 			
 			else
