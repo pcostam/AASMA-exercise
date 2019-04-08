@@ -343,10 +343,10 @@ public class StrategyPlayers {
 			//double x = LinearEquation.solveSystem(A,b);
 			double non_free_peer = strategies[i_A][0].utility1 - strategies[i_A][1].utility1 - strategies[i_B][0].utility1 + strategies[i_B][1].utility1;
 			double c_peer = -strategies[i_A][1].utility1+strategies[i_B][1].utility1; 
-
+			double x_peer = c_peer/non_free_peer;
 			if(non_free_peer != 0 && non_free_mine != 0)
 			{
-				double x_peer = c_peer/non_free_peer;
+				
 			
 				return("mine=("+ String.format(Locale.US, "%.2f", x_mine ) + "," + 
 						String.format(Locale.US, "%.2f", 1-x_mine ) + "),"+ "peer=(" + String.format(Locale.US, "%.2f", x_peer ) +
